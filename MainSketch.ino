@@ -1,4 +1,5 @@
 String SerialIn;
+String MostRecentCommand;
 void setup() 
 {
 Serial.begin(9600);
@@ -7,8 +8,7 @@ Serial.begin(9600);
 void loop()
 {
     
-    Serial.println(readHumidity());
-    delay(1000);
+    checkCommands();
 }
  
 
@@ -16,7 +16,7 @@ void loop()
  
  
  
- 
+///////////////////////////////////////////////////////////////Sensor Functions
 float readPressure() //Pa
 {
   int pressureValue = analogRead(A14);
@@ -33,28 +33,83 @@ float readHumidity() //RH
  float rhvoltage = (5*(0.00636*RH+0.1515));
  return rhvoltage*3;
 }
+//////////////////////////////////////////////////////////////////Command actions (methods to be called within each command if statement)
 
-void checkCommands
-{
- while(Serial.available())
- {
- SerialIn = Serial.ReadString();
- }
- if(filterCommand(SerialIn))
- {
-  //command actions
- }
- else if(!filterCommand(SerialIn))
- {
- return;
- }
-}
-
-bool filterCommand(String a)
+/////////////////////////////////////////////////////////////////Command Processing 
+bool filterCommand(String a)//check if the command is for the arduino or the RPI
 {
  if(a.charAt(0) == '2' && a.charAt(2) == '2')
  {
    return true;
  }
  else return false;
+}
+
+
+
+
+void checkCommands()//check for commands and call their methods
+{
+ while(Serial.available())
+ {
+ SerialIn = Serial.readString();
+ }
+ if(filterCommand(SerialIn))
+ {
+  if(SerialIn == "2020")
+  {
+    MostRecentCommand = "2020"; // update most recent command (troubleshooting)
+    //command 1
+  }
+  if(SerialIn == "2121")
+  {
+    MostRecentCommand = "2121";
+    //command 2
+  }
+  if(SerialIn == "2222")
+  {
+    MostRecentCommand = "2222";
+    //command 3
+  }
+  if(SerialIn == "2323")
+  {
+    MostRecentCommand = "2323";
+    //command 4
+  }
+  if(SerialIn == "2424")
+  {
+    MostRecentCommand = "2424";
+    //command 5
+  }
+  if(SerialIn == "2525")
+  {
+    MostRecentCommand = "2525";
+    //command 6
+  }
+  if(SerialIn == "2626")
+  {
+    MostRecentCommand = "2626";
+    //command 7
+  }
+  if(SerialIn == "2727")
+  {
+    MostRecentCommand = "2727";
+    //command 8
+  }
+  if(SerialIn == "2828")
+  {
+    MostRecentCommand = "2828";
+    //command 9
+  }
+  if(SerialIn == "2929")
+  {
+    MostRecentCommand = "2929";
+    //command 10
+  }
+  }
+ 
+ else if(!filterCommand(SerialIn))
+ {
+ return;
+ }
 }
