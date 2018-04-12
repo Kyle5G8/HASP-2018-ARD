@@ -1,6 +1,21 @@
 String SerialIn;
 String MostRecentCommand;
 String ProcessedCommand;
+
+int therm0 = A1;
+int therm1 = A2;
+int therm2 = A3;
+int therm3 = A4;
+int therm4 = A5;
+int therm5 = A6;
+//RGB pins 
+int r1 = 1;
+int g1 = 2;
+int b1 = 3;
+int r2 = 4;
+int g2 = 5;
+int b2 = 6; 
+//
 void setup() 
 {
 Serial.begin(9600);
@@ -9,7 +24,6 @@ Serial.begin(9600);
 void loop()
 {    
     checkCommands();  
-    
 }
  
 
@@ -18,6 +32,12 @@ void loop()
  
  
 ///////////////////////////////////////////////////////////////Sensor Functions
+float readtherm(int thermID)
+{
+     float temp = 0;
+     return temp;
+} 
+
 float readPressure() //Pa
 {
   int pressureValue = analogRead(A14);
@@ -48,7 +68,7 @@ void checkCommands()//check for commands and call their methods
   if(ProcessedCommand == "20")
   {
     MostRecentCommand = "2020"; // update most recent command (troubleshooting)
-    Serial.println(readPressure());
+    //command 1
   }
   if(ProcessedCommand == "21")
   {
@@ -96,7 +116,6 @@ void checkCommands()//check for commands and call their methods
     MostRecentCommand = "2929";
     //command 10
   }
-  ProcessedCommand = "";
+  ProcessedCommand = ""; //this and the next line prevent a command from executing endlessly
   SerialIn = "";
   }
- 
