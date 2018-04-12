@@ -19,6 +19,7 @@ int b2 = 6;
 void setup() 
 {
 Serial.begin(9600);
+pinMode(13, OUTPUT);
 }
  
 void loop()
@@ -38,6 +39,37 @@ float readtherm(int thermID)
      return temp;
 } 
 
+void flashOnce()
+{
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+}
+
+void flashTwice()
+{
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+}
+
+void dimUpDown()
+{
+  for(int i = 0; i <= 255; i++)
+  {
+    analogWrite(13, i);
+    delay(10);
+  }
+  for(int i = 255; i >= 0; i--)
+  {
+    analogWrite(13, i);
+    delay(10);
+  }
+}
 float readPressure() //Pa
 {
   int pressureValue = analogRead(A14);
@@ -65,55 +97,65 @@ void checkCommands()//check for commands and call their methods
  }
   ProcessedCommand = SerialIn.charAt(2);
   ProcessedCommand += SerialIn.charAt(3);
-  if(ProcessedCommand == "20")
+  if(ProcessedCommand == "20" && (SerialIn.charAt(4) == 'A' && SerialIn.charAt(5) == '3' && SerialIn.charAt(6) == 'D'))
   {
     MostRecentCommand = "2020"; // update most recent command (troubleshooting)
-    //command 1
+    Serial.println(ProcessedCommand + ProcessedCommand);
+    flashOnce();    
   }
-  if(ProcessedCommand == "21")
+  if(ProcessedCommand == "21" && (SerialIn.charAt(4) == 'A' && SerialIn.charAt(5) == '3' && SerialIn.charAt(6) == 'D'))
   {
     MostRecentCommand = "2121";
-    //command 2
+    Serial.println(ProcessedCommand + ProcessedCommand);
+    flashTwice();
    
   }
-  if(ProcessedCommand == "22")
+  if(ProcessedCommand == "22" && (SerialIn.charAt(4) == 'A' && SerialIn.charAt(5) == '3' && SerialIn.charAt(6) == 'D'))
   {
     MostRecentCommand = "2222";
-    //command 3
+    Serial.println(ProcessedCommand + ProcessedCommand);
+    dimUpDown();
   }
-  if(ProcessedCommand == "23")
+  if(ProcessedCommand == "23" && (SerialIn.charAt(4) == 'A' && SerialIn.charAt(5) == '3' && SerialIn.charAt(6) == 'D'))
   {
     MostRecentCommand = "2323";
+    Serial.println(ProcessedCommand + ProcessedCommand);
     //command 4
   }
-  if(ProcessedCommand == "24")
+  if(ProcessedCommand == "24" && (SerialIn.charAt(4) == 'A' && SerialIn.charAt(5) == '3' && SerialIn.charAt(6) == 'D'))
   {
     MostRecentCommand = "2424";
+    Serial.println(ProcessedCommand + ProcessedCommand);
     //command 5
   }
-  if(ProcessedCommand == "25")
+  if(ProcessedCommand == "25" && (SerialIn.charAt(4) == 'A' && SerialIn.charAt(5) == '3' && SerialIn.charAt(6) == 'D'))
   {
     MostRecentCommand = "2525";
+    Serial.println(ProcessedCommand + ProcessedCommand);
     //command 6
   }
-  if(ProcessedCommand == "26")
+  if(ProcessedCommand == "26" && (SerialIn.charAt(4) == 'A' && SerialIn.charAt(5) == '3' && SerialIn.charAt(6) == 'D'))
   {
     MostRecentCommand = "2626";
+    Serial.println(ProcessedCommand + ProcessedCommand);
     //command 7
   }
-  if(ProcessedCommand == "27")
+  if(ProcessedCommand == "27" && (SerialIn.charAt(4) == 'A' && SerialIn.charAt(5) == '3' && SerialIn.charAt(6) == 'D'))
   {
     MostRecentCommand = "2727";
+    Serial.println(ProcessedCommand + ProcessedCommand);
     //command 8
   }
-  if(ProcessedCommand == "28")
+  if(ProcessedCommand == "28" && (SerialIn.charAt(4) == 'A' && SerialIn.charAt(5) == '3' && SerialIn.charAt(6) == 'D'))
   {
     MostRecentCommand = "2828";
+    Serial.println(ProcessedCommand + ProcessedCommand);
     //command 9
   }
-  if(ProcessedCommand == "29")
+  if(ProcessedCommand == "29" && (SerialIn.charAt(4) == 'A' && SerialIn.charAt(5) == '3' && SerialIn.charAt(6) == 'D'))
   {
     MostRecentCommand = "2929";
+    Serial.println(ProcessedCommand + ProcessedCommand);
     //command 10
   }
   ProcessedCommand = ""; //this and the next line prevent a command from executing endlessly
