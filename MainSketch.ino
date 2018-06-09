@@ -1,6 +1,12 @@
 String SerialIn;
 String MostRecentCommand;
 String ProcessedCommand;
+int a = 0;//looping variables
+int b = 0;//looping variables
+int c = 0;//looping variables
+int time = 42;//time(updating)//////CHANGE//////
+x = 60;// how many seconds the loop should last
+
 
 int therm0 = A1;
 int therm1 = A2;
@@ -35,8 +41,16 @@ void loop()
 ///////////////////////////////////////////////////////////////Sensor Functions
 float readtherm(int thermID)
 {
-     float temp = 0;
-     return temp;
+  while (a < 0)
+  {
+    float temp = 0;
+    return temp;
+    Serial.println("T:" + String(temp) + ":" + String(time));//uploads data
+  	Serial.flush();
+  	delay(1000);//1 second buffer
+  	a += 1;
+  }
+  a = 0
 } 
 
 void flashOnce()
@@ -72,19 +86,35 @@ void dimUpDown()
 }
 float readPressure() //Pa
 {
-  int pressureValue = analogRead(A14);
-  float pressure=((pressureValue/1024.0)+0.095)/0.000009;
-  float millibars = pressure/100;
-  float Pa = millibars/0.01;
-  return pressure;
+  while (b < x)
+  {
+    int pressureValue = analogRead(A14);
+    float pressure=((pressureValue/1024.0)+0.095)/0.000009;
+    float millibars = pressure/100;
+    float Pa = millibars/0.01;
+    return pressure;
+    Serial.println("P:" + String(Pa) + ":" + String(time));//uploads data
+  	Serial.flush();
+  	delay(1000);//1 second buffer
+  	b += 1;
+  }
+  b = 0;
 }
 
 float readHumidity() //RH
-{ 
- float rhRead = analogRead(A0); 
- float RH = rhRead/(1.0546-0.00216*23);// replace 23 with thermistor value for temperature compensation
- float rhvoltage = (5*(0.00636*RH+0.1515));
- return rhvoltage*3;
+{
+  while (c < x)
+  {
+    float rhRead = analogRead(A0); 
+    float RH = rhRead/(1.0546-0.00216*23);// replace 23 with thermistor value for temperature compensation
+    float rhvoltage = (5*(0.00636*RH+0.1515));
+    return rhvoltage*3;
+    Serial.println("H:" + String(rhvoltage*3) + ":" String(time));//uploads data
+  	Serial.flush();
+  	delay(1000);//1 second buffer
+  	c += 1;
+  }
+  c = 0;
 }
 //////////////////////////////////////////////////////////////////Command actions (methods to be called within each command if statement)
 
