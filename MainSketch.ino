@@ -8,20 +8,16 @@ int time = 42;//time(updating)//////CHANGE//////
 x = 60;// how many seconds the loop should last
 
 
-int therm0 = A1;
-int therm1 = A2;
-int therm2 = A3;
-int therm3 = A4;
-int therm4 = A5;
-int therm5 = A6;
-//RGB pins 
-int r1 = 1;
-int g1 = 2;
-int b1 = 3;
-int r2 = 4;
-int g2 = 5;
-int b2 = 6; 
-//
+int valveHTR = 24; 
+int ATCMISC = 25;
+int GPIO13 = 28;
+int GPIO19 = 29;
+int GPIO26 = 30;
+int GPIO16 = 5;
+int GPIO18 = 6;
+int GPIO21 = 22;
+
+
 void setup() 
 {
 Serial.begin(9600);
